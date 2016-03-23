@@ -7,6 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <TwitterKit/TwitterKit.h>
+#import <Fabric/Fabric.h>
+#import <Twitter/Twitter.h>
+#import <AirshipKit/AirshipKit.h>
+
 
 @interface AppDelegate ()
 
@@ -16,8 +22,43 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    UITabBarController *tabBarController = (UITabBarController *) self.window.rootViewController;
+    tabBarController.view.tintColor = [UIColor redColor];
+
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    
+    [[Twitter sharedInstance] startWithConsumerKey:@"bcoYzbBpjQjyifv74iLF6KdBb" consumerSecret:@"EF558ZBCn1EXIlDaCbF3i2kKcm0BQqgeTgw0JzfoL86UPqx0QW"];
+    [Fabric with:@[[Twitter class]]];
+    
+    
+    // Call takeOff (which creates the UAirship singleton)
+    [UAirship takeOff];
+    
+    // User notifications will not be enabled until userPushNotificationsEnabled is
+    // set YES on UAPush. Once enabled, the setting will be persisted and the user
+    // will be prompted to allow notifications. Normally, you should wait for a more
+    // appropriate time to enable push to increase the likelihood that the user will
+    // accept notifications.
+    [UAirship push].userPushNotificationsEnabled = YES;
+
+    
+
+    
+    
     return YES;
+}
+
+
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                  openURL:url
+                                                        sourceApplication:sourceApplication
+                                                               annotation:annotation
+                    ];
+    // Add any custom logic here.
+    return handled;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

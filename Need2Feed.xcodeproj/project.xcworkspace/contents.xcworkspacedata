@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Need2Feed.xcodeproj">
+      location = "self:/Users/peterbayiokos/Desktop/Need2Feed/Need2Feed.xcodeproj">
    </FileRef>
 </Workspace>

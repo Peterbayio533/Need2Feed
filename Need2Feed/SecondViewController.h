@@ -10,6 +10,7 @@
 
 @interface SecondViewController : UIViewController
 
+- (IBAction)openDaleDietrichDotCom:(id)sender;
 
 @end
 

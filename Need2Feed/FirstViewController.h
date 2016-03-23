@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EventModel.h"
 
-@interface FirstViewController : UIViewController
+@interface FirstViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, EventModelProtocol>
 
+@property (strong, nonatomic) IBOutlet UITableView *listTableView;
 
 @end
 
